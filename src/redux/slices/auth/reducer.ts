@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login } from './thunk';
-import { AuthState, AuthResponse } from './types';
+import { AuthResponse, AuthState } from '@/app/types/auth/types';
+import Cookie from '@/utils/cookies';
 
 const initialState: AuthState = {
   user: null,
@@ -16,6 +17,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
+      Cookie.delete("token")
     },
     setCredentials: (state, action: PayloadAction<AuthResponse>) => {
       state.user = action.payload.user;
@@ -32,6 +34,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        Cookie.set("token" ,action.payload.token )
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
