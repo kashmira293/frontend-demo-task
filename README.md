@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Features
+
+- User authentication with login form
+- Protected dashboard route with dummy data
+- Responsive design with MUI components
+- Redux store with thunk middleware
+- API calls to dummy API endpoints
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install the dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Build
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Run `npm run build` to build the application
+2. Run `npm run start` to start the production server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `GET /api/users`: Returns a list of dummy users
+- `GET /api/posts`: Returns a list of dummy posts
+- `POST /api/login`: Logs in a user and returns a token
 
-## Learn More
+## Redux Store
 
-To learn more about Next.js, take a look at the following resources:
+The application uses a Redux store to manage the state of the application. The store is created with the `createStore` function from `redux` and is configured to use the `thunk` middleware.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The store has the following reducers:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `auth`: Handles user authentication
+- `dashboard`: Handles the state of the dashboard
 
-## Deploy on Vercel
+## Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application is built with the following components:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `App`: The main application component
+- `Login`: The login form component
+- `Dashboard`: The dashboard component
+- `Topbar`: The topbar component
+- `Sidebar`: The sidebar component
+- `DashboardContent`: The dashboard content component
+
+## Styles
+
+The application uses Material UI (MUI) components and styles. The styles are written in CSS-in-JS with the `styled` function from `@mui/material/styles`.
+
+## Testing
+
+The application has some basic tests written with Jest and React Testing Library. The tests are located in the `_tests` directory.
+
