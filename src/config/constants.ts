@@ -1,0 +1,1 @@
+export const THIREPARTY_API = "https://jsonplaceholder.typicode.com";

@@ -11,7 +11,6 @@ import rootReducer from './rootReducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-// Type for dispatching actions from the store
 export type AppDispatch = typeof store.dispatch;
 
 const store = configureStore({
