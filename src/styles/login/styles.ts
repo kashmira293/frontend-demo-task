@@ -159,7 +159,7 @@ export const loginStyles = {
           transform: "translateY(-1px)",
       },
       "&.Mui-disabled": {
-          background: "#e2e8f0",
+          background: "#5fc899",
           color: "#94a3b8",
       },
   },
