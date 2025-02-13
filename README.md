@@ -13,6 +13,16 @@
 3. Start the development server with `npm run dev`
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+## Login
+
+To login, use the following credentials:
+
+- **Email:** `test@gmail.com`
+- **Password:** `test@123`
+
+Navigate to the login page and enter the credentials above to access the application. Once logged in, you will be redirected to the dashboard.
+
+
 ## Build
 
 1. Run `npm run build` to build the application
