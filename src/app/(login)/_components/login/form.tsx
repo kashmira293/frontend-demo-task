@@ -10,65 +10,22 @@ import {
     FormControlLabel,
     Checkbox,
     Typography,
+    IconButton,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { login } from "@/redux/slices/auth/thunk";
-import toast from "react-hot-toast";
-import { LoginCredentials, LoginErrors } from "@/app/types/auth/types";
-import { validateField } from "./validations";
-import { Google } from "@mui/icons-material";
-const INITIAL_STATE = { email: "", password: "" };
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useLoginForm } from "@/hooks/useLoginForm";
 
 const LoginForm = () => {
-    const [loading, setLoading] = useState(false);
-    const [credentials, setCredentials] =
-        useState<LoginCredentials>(INITIAL_STATE);
-    const [errors, setErrors] = useState<LoginErrors>(INITIAL_STATE);
-    const router = useRouter();
-    const dispatch = useDispatch<AppDispatch>();
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setCredentials((prev) => ({ ...prev, [name]: value }));
-
-        const error = validateField(name, value);
-        if (!error) setErrors((prev) => ({ ...prev, [name]: "" }));
-    };
-    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        const error = validateField(name, value);
-        setErrors((prev) => ({ ...prev, [name]: error }));
-    };
-    const validateForm = (): boolean => {
-        const newErrors = {
-            email: validateField("email", credentials.email),
-            password: validateField("password", credentials.password),
-        };
-        setErrors(newErrors);
-        return !newErrors.email && !newErrors.password;
-    };
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!validateForm()) return;
-        setLoading(true);
-        try {
-            const resultAction = await dispatch(login(credentials));
-            if (login.fulfilled.match(resultAction)) {
-                router.push("/dashboard");
-                toast.success("Login successful!");
-            } else {
-                toast.error("Invalid credentials. Please try again.");
-            }
-        } catch (error) {
-            toast.error(
-                "Network error occurred. Please check your connection."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {
+        credentials,
+        errors,
+        loading,
+        showPassword,
+        handleInputChange,
+        handleBlur,
+        handleLogin,
+        togglePasswordVisibility,
+    } = useLoginForm();
     return (
         <>
             <Box component="form" noValidate onSubmit={handleLogin}>
@@ -80,14 +37,44 @@ const LoginForm = () => {
                         fullWidth
                         name={field}
                         label={field === "email" ? "Email Address" : "Password"}
-                        type={field === "password" ? "password" : "text"}
-                        error={!!errors[field as keyof LoginErrors]}
-                        helperText={errors[field as keyof LoginErrors]}
-                        value={credentials[field as keyof LoginCredentials]}
+                        type={
+                            field === "password"
+                                ? showPassword
+                                    ? "text"
+                                    : "password"
+                                : "text"
+                        }
+                        error={!!errors[field as keyof typeof errors]}
+                        helperText={errors[field as keyof typeof errors]}
+                        value={
+                            credentials[field as keyof typeof credentials] || ""
+                        }
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         placeholder={`Enter your ${field}`}
                         sx={loginStyles.textField}
+                        InputProps={{
+                            endAdornment: field === "password" && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label={
+                                            showPassword
+                                                ? "Hide password"
+                                                : "Show password"
+                                        }
+                                        onClick={togglePasswordVisibility}
+                                        edge="end"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                        InputLabelProps={{ shrink: true }}
                     />
                 ))}
                 <Box sx={loginStyles.formOptionsRow}>
