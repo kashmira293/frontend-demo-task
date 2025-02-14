@@ -100,18 +100,22 @@ export const loginStyles = {
               boxShadow: "0 0 0 3px rgba(99, 102, 241, 0.1)",
           },
       },
-      "& .MuiInputLabel-root": {
-          color: "#10b981",
-          fontWeight: 500,
-          transform: "translate(14px, 16px) scale(1)",
-          "&.Mui-focused": {
-              color: "#10b981",
-              transform: "translate(14px, -9px) scale(0.75)",
-          },
-      },
       "& .MuiInputBase-input": {
           padding: "14px 16px",
       },
+      "& .MuiInputLabel-root": {
+            color: "#10b981",
+            fontWeight: 500,
+            transform: "translate(14px, 16px) scale(1)", 
+            "&.Mui-focused, &.MuiInputLabel-shrink": {
+                color: "#10b981",
+                transform: "translate(14px, -9px) scale(0.75)",  
+            },
+        "&.Mui-error": {
+            color: "red", 
+        },
+    }
+
   },
   formOptionsRow: {
       display: "flex",

@@ -28,6 +28,7 @@ export const styles = {
         color: colors.text,
         boxShadow:
             "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+        minHeight: 71,
     },
     menuButton: {
         mr: 2,
@@ -106,7 +107,7 @@ export const styles = {
         height: {
             xs: "fit-content",
             md: "fit-content",
-            lg: "fit-content",
+            lg: "calc(100vh - 64px)",
             xl: "calc(100vh - 64px)",
         },
         bgcolor: colors.background.default,
